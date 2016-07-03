@@ -9,10 +9,10 @@ type Vector<'T when 'T : equality> =
     member v.Length = v.elements.Length
     member v.IsEmpty : bool = v.Length = 0
     member v.Resize (n : int) = 
-        if n < v.Length then
-            v.elements <- Array.sub v.elements 0 n
-        else
-            v.elements <- Array.append v.elements (Array.zeroCreate<'T> (n - v.Length))
+        if n < v.Length then v.elements <- Array.sub v.elements 0 n
+        else v.elements <- Array.append v.elements (Array.zeroCreate<'T> (n - v.Length))
+    member v.Clear =
+        v.elements <- Array.zeroCreate<'T> v.Length
     member v.Resize (b : int, n: int) =
         if b < 0 || b >= v.Length || n <= 0 || n >= v.Length then raise (ArrayIndexOutOfBound("Vector.Resize"))
         else v.elements <- Array.sub v.elements b n

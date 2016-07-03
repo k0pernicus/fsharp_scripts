@@ -34,14 +34,14 @@ type Vector<'T when 'T : equality> =
         match v.length with
             | 0 -> raise (ElementNotFound("Empty list"))
             | _ -> 
-                   let e = v.elements.[v.Length - 1]
-                   v.Resize (v.Length - 1)
-                   v.length <- v.Length - 1
+                   let e = v.elements.[v.length - 1]
+                   v.Resize (v.length - 1)
+                   v.length <- v.length - 1
                    e
     member v.Last =
         match v.length with
             | 0 -> raise (ElementNotFound("Empty list"))
-            | _ -> v.elements.[v.Length - 1]
+            | _ -> v.elements.[v.length - 1]
     member v.Exists (elt : 'T) : bool =
         match (v.elements |> Array.filter ((=) elt)).Length with
             | 0 -> false
